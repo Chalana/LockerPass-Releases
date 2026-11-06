@@ -1,7 +1,7 @@
 {
-  "version": "0.1.0",
-  "notes": "First Android release.",
-  "pub_date": "2026-11-05T07:21:12.734Z",
-  "url": "https://github.com/Chalana/LockerPass-Releases/releases/download/android-v0.1.0/LockerPass_0.1.0_android.apk",
-  "sha256": "d237700707f934a2b55ca10135665506a9e842ca034f6954e3590cd066bdad58"
+  "version": "0.1.1",
+  "notes": "LockerPass 0.1.1",
+  "pub_date": "2026-11-06T05:37:50.793Z",
+  "url": "https://github.com/Chalana/LockerPass-Releases/releases/download/android-v0.1.1/LockerPass_0.1.1_android.apk",
+  "sha256": "2958a6bc49f45efee0bf9748fc2a24e1b12e4d2b89d7156fb552a9b0ff4ae656"
 }
