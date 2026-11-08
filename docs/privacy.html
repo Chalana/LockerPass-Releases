@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy policy: LockerPass</title>
+  <meta name="description" content="What information LockerPass handles, why, and who it's shared with. Your vault is end-to-end encrypted and LockerPass has no analytics, tracking or ads.">
+  <link rel="canonical" href="https://chalana.github.io/LockerPass-Releases/privacy.html">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="./"><img src="logo.svg" alt="" width="32" height="32">LockerPass</a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="./">Home</a>
+        <a href="./#download">Download</a>
+        <a href="security.html">Security</a>
+        <a href="privacy.html" aria-current="page">Privacy</a>
+        <a href="./#support">Support</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="wrap narrow">
+      <h1>Privacy policy</h1>
+      <p class="updated">Last updated: 8 November 2026</p>
+
+      <p>This policy covers the LockerPass apps for Windows and Android, the LockerPass browser extension, and this website. It explains what information they handle, why, and who it's shared with.</p>
+
+      <div class="callout">
+        <p><strong>In short:</strong> the contents of your vault are end-to-end encrypted, so we can't read them. We keep only what's needed to sign you in, sync your devices and run your subscription. LockerPass has no analytics, no tracking and no advertising, and we don't sell or share your information for marketing.</p>
+      </div>
+
+      <nav class="toc" aria-label="On this page">
+        <strong>On this page</strong>
+        <ul>
+          <li><a href="#vault">Your vault</a></li>
+          <li><a href="#account">Account information</a></li>
+          <li><a href="#services">Services LockerPass uses</a></li>
+          <li><a href="#extension">The browser extension</a></li>
+          <li><a href="#android">The Android app</a></li>
+          <li><a href="#website">This website</a></li>
+          <li><a href="#deletion">Keeping and deleting your information</a></li>
+          <li><a href="#children">Children</a></li>
+          <li><a href="#changes">Changes and contact</a></li>
+        </ul>
+      </nav>
+
+      <h2 id="vault">Your vault</h2>
+      <p>Everything you keep in LockerPass (logins, passwords, two-factor codes, passkeys, cards, notes and other items, including their titles and websites) is encrypted on your device with a key made from your master password and your Secret Key, before it's synced. Your master password, Secret Key and Recovery Code never leave your devices. We can't read your vault, and we can't recover it for you. <a href="security.html">How the encryption works</a>.</p>
+
+      <h2 id="account">Account information</h2>
+      <p>To sign you in and sync your vault, we keep:</p>
+      <ul>
+        <li><strong>Your sign-in details:</strong> your email address, and, if you sign in with Google, the basic profile Google shares (your name and picture). If you sign in with email, your account password is handled by Google Firebase Authentication and isn't readable by us.</li>
+        <li><strong>Your encrypted vault</strong> and what your devices need to unlock it together with your master password and Secret Key (a random salt, encryption settings, and your vault key, itself encrypted).</li>
+        <li><strong>Your devices:</strong> each signed-in device's name (for example the computer's name), type and model, its LockerPass version, and when it was added and last online, so you can see and remove them in Settings → Devices.</li>
+        <li><strong>Your subscription:</strong> your email address, your plan and its start and end dates.</li>
+      </ul>
+      <p>We use this information only to provide LockerPass to you. We don't use it for advertising or profiling.</p>
+
+      <h2 id="services">Services LockerPass uses</h2>
+      <ul>
+        <li><strong>Google Firebase</strong> (Authentication and Cloud Firestore) stores the account information above and carries your encrypted vault between your devices. Google processes it on our behalf under its <a href="https://firebase.google.com/support/privacy">Firebase privacy and security terms</a>.</li>
+        <li><strong>Have I Been Pwned</strong>: when you open Watchtower, LockerPass checks for leaked passwords by sending the first 5 characters of each password's SHA-1 hash, never the password. The service can't tell which password was checked.</li>
+        <li><strong>2fa.directory</strong>: Watchtower downloads its public list of sites that support two-factor sign-in, at most once a week, and matches it on your device. Nothing about your vault is sent.</li>
+        <li><strong>GitHub</strong>: the apps check GitHub for updates and download them from there.</li>
+      </ul>
+      <p>Like any website or server, these services can see your device's IP address when LockerPass connects to them.</p>
+
+      <h2 id="extension">The browser extension</h2>
+      <p>The LockerPass browser extension collects no data about you and sends nothing to us or anyone else. It makes no internet connections of its own and has no analytics. It doesn't store your vault.</p>
+      <ul>
+        <li><strong>How it works.</strong> It only talks to the LockerPass app on the same computer, through your browser's native messaging. The app answers only while it's unlocked, and only the LockerPass extension can connect to it.</li>
+        <li><strong>The page you're on.</strong> To offer and fill the right logins, it reads the current tab's address and finds sign-in, card and address fields on the page. It doesn't record your browsing.</li>
+        <li><strong>Logins you choose to save.</strong> After you sign in or sign up on a website, it can offer to save the login. Until you save or dismiss it, it's kept in the browser's temporary session storage, which is cleared when the browser closes. When you save it, it goes to the LockerPass app, which encrypts it in your vault.</li>
+        <li><strong>Passkeys.</strong> When a website asks for a passkey, the extension passes the request to the LockerPass app, which creates or uses the passkey in your vault.</li>
+        <li><strong>Permissions.</strong> Native messaging, to talk to the LockerPass app. Access to websites, to find and fill form fields. Active tab and scripting, to fill the page you're on when you ask. Storage, for the temporary session storage above.</li>
+      </ul>
+
+      <h2 id="android">The Android app</h2>
+      <ul>
+        <li><strong>Autofill.</strong> If you turn on LockerPass Autofill, Android shows LockerPass the sign-in fields in apps and websites so it can fill them, and offers to save logins you enter. This happens on your phone; LockerPass remembers which app a login belongs to, inside your encrypted vault.</li>
+        <li><strong>Camera.</strong> Scanning a QR code uses Google Play services' code scanner. LockerPass gets only the scanned text, not the camera image, and doesn't need the camera permission.</li>
+        <li><strong>Fingerprint.</strong> Fingerprint unlock uses Android's biometric system. Your fingerprint never reaches LockerPass.</li>
+        <li><strong>Backups and screenshots.</strong> LockerPass turns off Android backups of its data, and blocks screenshots of the app.</li>
+      </ul>
+
+      <h2 id="website">This website</h2>
+      <p>This website is hosted on GitHub Pages, which may log visitors' IP addresses for security, as described in <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub's privacy statement</a>. The download section asks GitHub for the newest version numbers. The site sets no cookies and has no analytics.</p>
+
+      <h2 id="deletion">Keeping and deleting your information</h2>
+      <p>We keep your account information while you have a LockerPass account. Removing a device in Settings → Devices erases LockerPass's data on that device and removes it from your list. To delete your account and everything stored with it in the cloud, email <a href="mailto:chalanamg@gmail.com">chalanamg@gmail.com</a> from your account's email address, and it will be deleted within 30 days. You can export your vault from the Windows app first.</p>
+
+      <h2 id="children">Children</h2>
+      <p>LockerPass isn't directed at children under 13, and we don't knowingly collect information from them.</p>
+
+      <h2 id="changes">Changes and contact</h2>
+      <p>If this policy changes, the new version will be published on this page with a new date. Questions about this policy or your information: <a href="mailto:chalanamg@gmail.com">chalanamg@gmail.com</a>.</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 LockerPass</span>
+      <nav aria-label="Footer">
+        <a href="security.html">Security</a>
+        <a href="privacy.html">Privacy policy</a>
+        <a href="https://github.com/Chalana/LockerPass-Releases/releases">All releases</a>
+        <a href="mailto:chalanamg@gmail.com">Contact</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Security: how LockerPass protects your data</title>
+  <meta name="description" content="How LockerPass encrypts your vault on your device with your master password and Secret Key, what's stored in the cloud, and how your computer, phone and browser are protected.">
+  <link rel="canonical" href="https://chalana.github.io/LockerPass-Releases/security.html">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <meta property="og:title" content="How LockerPass protects your data">
+  <meta property="og:description" content="End-to-end encryption with your master password and Secret Key. No one else can read your vault.">
+  <meta property="og:url" content="https://chalana.github.io/LockerPass-Releases/security.html">
+  <meta property="og:image" content="https://chalana.github.io/LockerPass-Releases/icon-512.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="./"><img src="logo.svg" alt="" width="32" height="32">LockerPass</a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="./">Home</a>
+        <a href="./#download">Download</a>
+        <a href="security.html" aria-current="page">Security</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="./#support">Support</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="wrap narrow">
+      <h1>How LockerPass protects your data</h1>
+      <p class="updated">Last updated: 8 November 2026</p>
+
+      <div class="callout">
+        <p><strong>In short:</strong> your vault is encrypted on your own device with a key made from your master password and your Secret Key. Only encrypted data leaves your device. We never have your master password or Secret Key, so we can't read your vault, and neither can anyone who breaks into the servers it syncs through.</p>
+      </div>
+
+      <nav class="toc" aria-label="On this page">
+        <strong>On this page</strong>
+        <ul>
+          <li><a href="#two-secrets">Your two secrets</a></li>
+          <li><a href="#encryption">How your vault is encrypted</a></li>
+          <li><a href="#cloud">What's stored in the cloud</a></li>
+          <li><a href="#recovery">If you forget your master password</a></li>
+          <li><a href="#devices">On your computer and phone</a></li>
+          <li><a href="#extension">The browser extension</a></li>
+          <li><a href="#watchtower">Watchtower</a></li>
+          <li><a href="#limits">What LockerPass can't protect against</a></li>
+          <li><a href="#report">Reporting a security problem</a></li>
+        </ul>
+      </nav>
+
+      <h2 id="two-secrets">Your two secrets</h2>
+      <p>Opening your vault takes two things, and only you have them:</p>
+      <ul>
+        <li><strong>Your master password.</strong> The one password you remember. LockerPass never stores it and never sends it anywhere.</li>
+        <li><strong>Your Secret Key.</strong> A random 128-bit key, made on your computer when you create your account, that looks like <code>LP1-XXXXXX-XXXXX-…</code>. It's kept in your device's secure storage (Windows Credential Manager on a computer, the Android Keystore on a phone) and printed on your Emergency Kit. It's never sent to us either.</li>
+      </ul>
+      <p>Why two? People choose master passwords they can remember, and those can sometimes be guessed. The Secret Key is too long and random to guess. Even if someone stole the encrypted data from the cloud and tried billions of passwords, they'd also need your Secret Key, which isn't there.</p>
+      <p>Signing in with Google or with your email and account password is separate. It only tells the sync service which account is yours. It can't unlock your vault.</p>
+
+      <h2 id="encryption">How your vault is encrypted</h2>
+      <div class="diagram" role="img" aria-label="Your master password and Secret Key combine into your account unlock key, which unlocks the vault key, which encrypts each item.">
+        <svg viewBox="0 0 640 230" xmlns="http://www.w3.org/2000/svg">
+          <style>
+            text { font: 13px Inter, system-ui, sans-serif; fill: var(--fg); }
+            .t { font-weight: 600; text-anchor: middle; }
+            .s { font-size: 11.5px; fill: var(--muted); }
+            .c { text-anchor: middle; }
+            .box { fill: var(--surface-2); stroke: var(--line-strong); }
+            .key { fill: var(--accent-soft); stroke: var(--accent); }
+            .line { fill: none; stroke: var(--muted); stroke-width: 1.5; }
+            .head { fill: var(--muted); }
+          </style>
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="head" d="M0 0L10 5L0 10z"/></marker>
+          </defs>
+          <path class="line" marker-end="url(#arrow)" d="M150 50 H200 V96 H232"/>
+          <path class="line" marker-end="url(#arrow)" d="M150 170 H200 V124 H232"/>
+          <path class="line" marker-end="url(#arrow)" d="M398 110 H428"/>
+          <path class="line" marker-end="url(#arrow)" d="M560 88 V60"/>
+          <path class="line" marker-end="url(#arrow)" d="M560 132 V158"/>
+          <rect class="box" x="10" y="28" width="140" height="44" rx="10"/>
+          <rect class="box" x="10" y="148" width="140" height="44" rx="10"/>
+          <rect class="key" x="234" y="82" width="164" height="56" rx="10"/>
+          <rect class="box" x="430" y="88" width="200" height="44" rx="10"/>
+          <rect class="box" x="490" y="12" width="140" height="46" rx="10"/>
+          <rect class="box" x="490" y="160" width="140" height="46" rx="10"/>
+          <text class="t" x="80" y="55">Master password</text>
+          <text class="t" x="80" y="175">Secret Key</text>
+          <text class="t" x="316" y="106">Account unlock key</text>
+          <text class="s c" x="316" y="125">only ever on your device</text>
+          <text class="t" x="530" y="106">Vault key (256-bit)</text>
+          <text class="s c" x="530" y="123">random, stored encrypted</text>
+          <text class="t" x="560" y="40">Each item</text>
+          <text class="t" x="560" y="188">Each vault</text>
+          <text class="s" x="10" y="90">Argon2id (64 MB, 3 passes)</text>
+          <text class="s" x="10" y="212">HKDF-SHA256</text>
+          <text class="s" x="390" y="78">unlocks</text>
+          <text class="s" x="566" y="78">encrypts</text>
+          <text class="s" x="566" y="150">encrypts</text>
+        </svg>
+      </div>
+      <ul>
+        <li>Your master password goes through <strong>Argon2id</strong>, a deliberately slow function that uses 64 MB of memory, so every guess costs an attacker real time and hardware. Your Secret Key goes through <strong>HKDF-SHA256</strong>. The two results are combined into your <strong>account unlock key</strong>.</li>
+        <li>That key unlocks your <strong>vault key</strong>, a random 256-bit key. Changing your master password re-encrypts only the vault key, so your items stay as they are.</li>
+        <li>Every item and every vault is encrypted separately with <strong>XChaCha20-Poly1305</strong>, a modern authenticated cipher. It also detects any change to the encrypted data, and each item is tied to its own id so encrypted items can't be swapped around.</li>
+        <li>Titles, usernames, passwords, websites, notes and every other field are encrypted. Only each item's id and the time it last changed aren't.</li>
+      </ul>
+
+      <h2 id="cloud">What's stored in the cloud</h2>
+      <p>Your vault syncs through Google Firebase. The cloud holds:</p>
+      <ul>
+        <li>your encrypted items and vaults, which it can't read;</li>
+        <li>what a new device needs to unlock your account together with your master password and Secret Key: a random salt, the Argon2id settings, and your vault key, encrypted with your account unlock key;</li>
+        <li>your sign-in email, the list of your devices (each one's name, type, model, LockerPass version, and when it was added and last online) and your subscription.</li>
+      </ul>
+      <p>Each account can reach only its own data. Your vault on each device is the main copy and works offline, and the cloud only carries changes between devices.</p>
+
+      <h2 id="recovery">If you forget your master password</h2>
+      <p>Your Emergency Kit has a <strong>Recovery Code</strong> (<code>LPR-…</code>, 160 random bits). It unlocks a second encrypted copy of your vault key, so you can choose a new master password and keep all your items. LockerPass then gives you a new Secret Key and Recovery Code, and the old ones stop working.</p>
+      <p>The Recovery Code never leaves your device either. That means <strong>we can't reset your master password for you</strong>: without your master password or your Recovery Code, no one can open your vault. Keep your Emergency Kit somewhere safe.</p>
+
+      <h2 id="devices">On your computer and phone</h2>
+      <ul>
+        <li><strong>Locking.</strong> LockerPass locks after a few minutes without use, and locking wipes the keys from memory. Only the master password (or Windows Hello or your fingerprint, if you turn them on) opens it again.</li>
+        <li><strong>Windows Hello and fingerprint unlock.</strong> These are off until you turn them on. They unlock a copy of your session that's sealed with your device's secure hardware or Windows' memory protection, and nothing extra is written to disk. LockerPass still asks for your master password at least every 14 days, after a restart on Windows, and when the password changes on another device.</li>
+        <li><strong>The clipboard.</strong> Copied passwords and codes are kept out of Windows' clipboard history and cleared after 90 seconds.</li>
+        <li><strong>Android.</strong> The Secret Key is sealed with the Android Keystore, backups of LockerPass's data are turned off, and screenshots and the Recent apps preview of LockerPass are blocked. Connections to Google's servers are pinned to Google's own certificate authorities, and LockerPass checks that it's the genuine, unmodified app before it runs.</li>
+        <li><strong>Removing a device.</strong> From Settings → Devices on your computer you can remove a device. Next time it's online, it erases its copy of your vault and signs out. If a device is lost or stolen, also change your master password.</li>
+        <li><strong>Updates.</strong> The apps update from our GitHub releases. Android checks each download against a published checksum, and only installs updates signed with the same key as the app you have.</li>
+      </ul>
+
+      <h2 id="extension">The browser extension</h2>
+      <ul>
+        <li>The extension doesn't store or sync your vault. It asks the LockerPass app on the same computer, and only while the app is unlocked.</li>
+        <li>The browser lets only the LockerPass extension start its connection to the app, and the app and its connector prove to each other that they're genuine, so other programs can't pretend to be either side.</li>
+        <li>A login is only filled on the website it was saved for. Filling one somewhere else asks you first, and cards are only filled on secure (https) pages.</li>
+        <li>A new login you've just signed in with is held in the browser's memory for up to 5 minutes, and is only saved if you click Save.</li>
+      </ul>
+
+      <h2 id="watchtower">Watchtower</h2>
+      <p>Weak, reused and insecure-website checks run on your device. To check for leaked passwords, LockerPass uses Have I Been Pwned's range search: it sends only the first 5 characters of a fingerprint (SHA-1 hash) of a password, never the password itself, and compares the matches on your device. The list of sites that support two-factor sign-in is downloaded whole and matched on your device too.</p>
+
+      <h2 id="limits">What LockerPass can't protect against</h2>
+      <p>No password manager can make every situation safe. Be aware that:</p>
+      <ul>
+        <li>if your computer or phone has malware, such as a keylogger, it may see what you see and type while your vault is unlocked;</li>
+        <li>anyone who has both your master password and your Emergency Kit can open your vault, so keep the kit private and your master password unique;</li>
+        <li>if you lose both your master password and your Recovery Code, your vault can't be recovered by anyone, including us.</li>
+      </ul>
+
+      <h2 id="report">Reporting a security problem</h2>
+      <p>If you think you've found a security problem in LockerPass, please email <a href="mailto:chalanamg@gmail.com">chalanamg@gmail.com</a> with the details before sharing them publicly, so it can be fixed first.</p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>© 2026 LockerPass</span>
+      <nav aria-label="Footer">
+        <a href="security.html">Security</a>
+        <a href="privacy.html">Privacy policy</a>
+        <a href="https://github.com/Chalana/LockerPass-Releases/releases">All releases</a>
+        <a href="mailto:chalanamg@gmail.com">Contact</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
