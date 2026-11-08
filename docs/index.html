@@ -4,15 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>LockerPass: password manager with end-to-end encryption</title>
-  <meta name="description" content="LockerPass is a password manager for Windows and Android. Your vault is encrypted on your device with your master password and Secret Key, so no one else can read it.">
+  <meta name="description" content="LockerPass is a password manager for Windows, Linux and Android. Your vault is encrypted on your device with your master password and Secret Key, so no one else can read it.">
   <!-- Google Search Console: paste the verification tag Google gives you on the next line. -->
-  <meta name="google-site-verification" content="12xYd0r5qy-VEWLFKdum0y5-_y0i7pXXXM7B-tZbJAk" />
+
   <link rel="canonical" href="https://chalana.github.io/LockerPass-Releases/">
   <link rel="icon" href="favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="icon-512.png">
   <meta property="og:type" content="website">
   <meta property="og:title" content="LockerPass password manager">
-  <meta property="og:description" content="Passwords, two-factor codes, cards and passkeys, encrypted on your device. For Windows, Android, Firefox and Edge.">
+  <meta property="og:description" content="Passwords, two-factor codes, cards and passkeys, encrypted on your device. For Windows, Linux and Android; iOS and browser extensions coming soon.">
   <meta property="og:url" content="https://chalana.github.io/LockerPass-Releases/">
   <meta property="og:image" content="https://chalana.github.io/LockerPass-Releases/icon-512.png">
   <link rel="stylesheet" href="style.css">
@@ -22,7 +22,7 @@
     "@type": "SoftwareApplication",
     "name": "LockerPass",
     "applicationCategory": "SecurityApplication",
-    "operatingSystem": "Windows, Android",
+    "operatingSystem": "Windows, Linux, Android",
     "description": "A password manager with end-to-end encryption: your vault is encrypted on your device with your master password and Secret Key.",
     "url": "https://chalana.github.io/LockerPass-Releases/",
     "image": "https://chalana.github.io/LockerPass-Releases/icon-512.png"
@@ -53,6 +53,7 @@
           <a class="btn btn-primary" href="#download">Download LockerPass</a>
           <a class="btn" href="security.html">How it protects you</a>
         </div>
+        <p class="note">For Windows, Linux and Android. iPhone, iPad and browser extensions coming soon.</p>
       </div>
     </div>
 
@@ -131,12 +132,22 @@
       <div class="wrap">
         <h2>Download LockerPass</h2>
         <p class="section-lead">Start on your computer: that's where you create your account and get your Emergency Kit. Then add your phone and browser.</p>
-        <div class="grid">
+        <div class="grid downloads">
           <div class="card platform">
             <h3>Windows</h3>
-            <p>The LockerPass app for Windows 10 and 11. Create your account here.</p>
+            <p>The LockerPass app for Windows 10 and 11.</p>
             <span class="status" data-version="windows"></span>
             <a class="btn btn-primary" id="download-windows" href="https://github.com/Chalana/LockerPass-Releases/releases/latest">Download for Windows</a>
+          </div>
+          <div class="card platform">
+            <h3>Linux</h3>
+            <p>For Ubuntu 22.04 or newer, Debian 12, Fedora, Linux Mint and most other 64-bit desktops. Use the .deb on Ubuntu, Debian or Mint, the .rpm on Fedora, or the AppImage anywhere.</p>
+            <span class="status" data-version="linux"></span>
+            <div class="actions" style="justify-content:flex-start;margin-top:auto">
+              <a class="btn btn-primary" id="download-deb" href="https://github.com/Chalana/LockerPass-Releases/releases/latest">.deb</a>
+              <a class="btn" id="download-rpm" href="https://github.com/Chalana/LockerPass-Releases/releases/latest">.rpm</a>
+              <a class="btn" id="download-appimage" href="https://github.com/Chalana/LockerPass-Releases/releases/latest">AppImage</a>
+            </div>
           </div>
           <div class="card platform">
             <h3>Android</h3>
@@ -145,10 +156,14 @@
             <a class="btn btn-primary" id="download-android" href="https://github.com/Chalana/LockerPass-Releases/releases">Download for Android</a>
           </div>
           <div class="card platform">
-            <h3>Browser extension</h3>
-            <p>Fill and save logins, codes, cards and passkeys in Firefox and Microsoft Edge. Needs the Windows app installed and unlocked.</p>
-            <span class="status">Coming soon to Firefox Add-ons and Edge Add-ons.</span>
-            <!-- When the stores approve the extension, replace the status line above with:
+            <h3>iPhone and iPad <span class="soon">Coming soon</span></h3>
+            <p>LockerPass for iOS, with Face ID and Touch ID unlock and AutoFill in apps and Safari, is on its way.</p>
+          </div>
+          <div class="card platform">
+            <h3>Browser extension <span class="soon">Coming soon</span></h3>
+            <p>Fill and save logins, codes, cards and passkeys in Firefox and Microsoft Edge. Needs the LockerPass app installed on your computer and unlocked.</p>
+            <span class="status">Coming to Firefox Add-ons and Microsoft Edge Add-ons.</span>
+            <!-- When the stores approve the extension, remove the "Coming soon" badge and replace the status line above with:
             <a class="btn" href="FIREFOX_LISTING_URL">Get it for Firefox</a>
             <a class="btn" href="EDGE_LISTING_URL">Get it for Edge</a> -->
           </div>
@@ -192,11 +207,15 @@
         const res = await fetch("https://api.github.com/repos/Chalana/LockerPass-Releases/releases/latest");
         if (res.ok) {
           const release = await res.json();
-          const setup = release.assets.find((a) => a.name.endsWith("-setup.exe"));
-          if (setup) {
-            document.getElementById("download-windows").href = setup.browser_download_url;
-            show("windows", release.tag_name.replace(/^v/, ""));
-          }
+          const version = release.tag_name.replace(/^v/, "");
+          const link = (id, ending) => {
+            const asset = release.assets.find((a) => a.name.endsWith(ending));
+            if (asset) document.getElementById(id).href = asset.browser_download_url;
+            return Boolean(asset);
+          };
+          if (link("download-windows", "-setup.exe")) show("windows", version);
+          const linux = [link("download-deb", ".deb"), link("download-rpm", ".rpm"), link("download-appimage", ".AppImage")];
+          if (linux.some(Boolean)) show("linux", version);
         }
       } catch {}
       try {

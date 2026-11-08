@@ -55,7 +55,7 @@
       <p>Opening your vault takes two things, and only you have them:</p>
       <ul>
         <li><strong>Your master password.</strong> The one password you remember. LockerPass never stores it and never sends it anywhere.</li>
-        <li><strong>Your Secret Key.</strong> A random 128-bit key, made on your computer when you create your account, that looks like <code>LP1-XXXXXX-XXXXX-…</code>. It's kept in your device's secure storage (Windows Credential Manager on a computer, the Android Keystore on a phone) and printed on your Emergency Kit. It's never sent to us either.</li>
+        <li><strong>Your Secret Key.</strong> A random 128-bit key, made on your computer when you create your account, that looks like <code>LP1-XXXXXX-XXXXX-…</code>. It's kept in your device's secure storage (Windows Credential Manager or your Linux desktop's keyring on a computer, the Android Keystore on a phone) and printed on your Emergency Kit. It's never sent to us either.</li>
       </ul>
       <p>Why two? People choose master passwords they can remember, and those can sometimes be guessed. The Secret Key is too long and random to guess. Even if someone stole the encrypted data from the cloud and tried billions of passwords, they'd also need your Secret Key, which isn't there.</p>
       <p>Signing in with Google or with your email and account password is separate. It only tells the sync service which account is yours. It can't unlock your vault.</p>
