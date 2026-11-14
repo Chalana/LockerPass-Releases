@@ -1,7 +1,7 @@
 {
-  "version": "0.1.4",
-  "notes": "Show one vault at a time, smaller item rows, merge duplicate logins, suggest a strong password when you sign up, and website icons.",
-  "pub_date": "2026-11-11T09:31:17.562Z",
-  "url": "https://github.com/Chalana/LockerPass-Releases/releases/download/android-v0.1.4/LockerPass_0.1.4_android.apk",
-  "sha256": "4ccfb466cb0536791665f2b6de23b6af15941c5b7b2db65086252b267b2bb642"
+  "version": "0.1.6",
+  "notes": "New categories added",
+  "pub_date": "2026-11-14T16:42:21.911Z",
+  "url": "https://github.com/Chalana/LockerPass-Releases/releases/download/android-v0.1.6/LockerPass_0.1.6_android.apk",
+  "sha256": "7cb42f7e707e53a480297c66730357d034a8b2aeb62505b3ab89402933d3eb86"
 }
