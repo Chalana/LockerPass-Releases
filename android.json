@@ -1,7 +1,7 @@
 {
-  "version": "0.1.6",
-  "notes": "New categories added",
-  "pub_date": "2026-11-14T16:42:21.911Z",
-  "url": "https://github.com/Chalana/LockerPass-Releases/releases/download/android-v0.1.6/LockerPass_0.1.6_android.apk",
-  "sha256": "7cb42f7e707e53a480297c66730357d034a8b2aeb62505b3ab89402933d3eb86"
+  "version": "0.1.7",
+  "notes": "Lock LockerPass, or a whole computer, from your other devices.",
+  "pub_date": "2026-11-17T08:09:36.275Z",
+  "url": "https://github.com/Chalana/LockerPass-Releases/releases/download/android-v0.1.7/LockerPass_0.1.7_android.apk",
+  "sha256": "9bfda0e17fdbf208f32eed43b80cefd6fa13e543ae8688cb4f0ad3ecea07da8d"
 }
